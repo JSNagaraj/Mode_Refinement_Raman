@@ -648,3 +648,16 @@ if (1==1):
 #    export_peaks("modeselection",rotStrengths[1], dipStrengths[1])
     
 #    print ('Recalculated {:4d} out of {:4d} modes'.format(len(numFreq),len(rkfFiles[0].get_frequencies())))
+def Raman_Intensity(alpha_der_sq,gamma_der_sq):
+    S_bohr = (45*alpha_der_sq)+(7*gamma_der_sq)
+    S = S_bohr*((bohr_to_ang)**4)
+    return S
+    
+alpha_der = (1/3)*(smallPol[0]+smallPol[4]+smallPol[8])
+alpha_der_sq = alpha_der**2
+
+ii_part = (smallPol[0] - smallPol[4])**2 + (smallPol[4] - smallPol[8])**2 + (smallPol[8]-smallPol[0])**2
+ij_part = 6*((smallPol[3])**2 + (smallPol[6])**2 + (smallPol[7])**2)
+gamma_der_sq = (1/2)*(ii_part + ij_part)
+
+print ("Raman Intensity=", Raman_Intensity(alpha_der_sq,gamma_der_sq))
